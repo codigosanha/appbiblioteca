@@ -114,4 +114,45 @@ class Prestamos extends CI_Controller {
         }
 
     }
+
+    public function renovar(){
+        $prestamo = json_decode($this->input->post("prestamo"));
+        $dataFinalizar = array(
+            'fecha_entrega' => date('Y-m-d'),
+            'estado' => 1,
+        );
+        if ($this->Prestamos_model->update($prestamo->id, $dataFinalizar)) {
+            $fecha_prestamo = date('Y-m-d');
+            $fecha_devolucion = strtotime ('+5 day', strtotime($fecha_prestamo));
+            $fecha_devolucion = date ( 'Y-m-d' , $fecha_devolucion );
+            $dataRegistrar = array(
+                "libro_id"        => $prestamo->libro_id,
+                "lector_id"       => $prestamo->lector_id,
+                "fecha_prestamo"   => $fecha_prestamo,
+                "fecha_devolucion"   => $fecha_devolucion,
+                "hora"   => date("H:i"),
+                "estado" => 0,
+                "usuario_id"      => $this->session->userdata("id_user"),
+                "renovacion" => 1
+            );
+            $this->Prestamos_model->guardar($dataRegistrar);
+            echo "1";
+            
+        } else {
+            echo "0";
+        }
+    }
+
+    public function renovaciones(){
+        $contenido_interno = array(
+            'prestamos' => $this->Prestamos_model->getPrestamos(0,1),
+        );
+
+        $contenido_exterior = array(
+            'title'     => 'Listado de Prestamos',
+            'contenido' => $this->load->view('prestamos/renovaciones', $contenido_interno, true),
+        );
+
+        $this->load->view('template', $contenido_exterior);
+    }
 }

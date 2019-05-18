@@ -5,6 +5,7 @@ class Reportes extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Reportes_model');
+        $this->load->model('Libros_model');
         if (!$this->session->userdata('login')) {
             redirect(base_url());
         }
@@ -344,7 +345,7 @@ class Reportes extends CI_Controller {
     }
 
     public function exportarPrestamos(){
-                $this->load->library('excel');
+        $this->load->library('excel');
         
 
         //$this->excel->setActiveSheetIndex(0);
@@ -437,5 +438,124 @@ class Reportes extends CI_Controller {
         $objWriter = new PHPExcel_Writer_Excel2007($this->excel); 
         //Hacemos una salida al navegador con el archivo Excel.
         $objWriter->save('php://output');
+    }
+
+    public function total_libros(){
+
+        $contenido_interno = array(
+            "libros" => $this->Libros_model->getLibros()
+        );
+        $data = array(
+            'title'     => 'Total de libros',
+            'contenido' => $this->load->view('reportes/total_libros', $contenido_interno, true),
+        );
+
+        $this->load->view('template', $data);
+    }
+
+    public function exportarLibros(){
+        $this->load->library('excel');
+        
+
+        //$this->excel->setActiveSheetIndex(0);
+        $this->excel->setActiveSheetIndex(0)->mergeCells('B1:k1');
+        $this->excel->getActiveSheet()->setTitle('Total de Libros');
+        $contador = 3;
+
+        $this->excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('D')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('E')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('F')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('G')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('H')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('I')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('J')->setAutoSize(true);
+        $this->excel->getActiveSheet()->getColumnDimension('K')->setAutoSize(true);
+        
+
+        $styleArray = array(
+            'font' => array(
+                'bold' => true,
+            ),
+            'alignment' => array(
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            )
+        );
+        //Le aplicamos negrita a los títulos de la cabecera.
+        $this->excel->getActiveSheet()->getStyle('B1')->applyFromArray($styleArray);
+
+        $this->excel->getActiveSheet()->getStyle("A{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("B{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("C{$contador}")->getFont()->setBold(true);
+        
+        $this->excel->getActiveSheet()->getStyle("D{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("E{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("F{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("G{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("H{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("I{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("J{$contador}")->getFont()->setBold(true);
+        $this->excel->getActiveSheet()->getStyle("K{$contador}")->getFont()->setBold(true);
+        
+
+        $this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(35);
+        $objDrawing = new PHPExcel_Worksheet_Drawing();
+        $objDrawing->setName("logo");
+        $objDrawing->setDescription("Tt's my logo");
+        $objDrawing->setPath("./assets/images/logo.png");
+        $objDrawing->setOffsetY(10);
+        $objDrawing->setOffsetX(10);
+        $objDrawing->setCoordinates('A1');
+        $objDrawing->setWidth(30);
+        $objDrawing->setHeight(30);
+        $objDrawing->setWorksheet($this->excel->getActiveSheet());
+
+        $this->excel->getActiveSheet()->setCellValue("B1", 'TOTAL DE LIBROS');
+
+        $this->excel->getActiveSheet()->setCellValue("A{$contador}", 'N°');         
+        $this->excel->getActiveSheet()->setCellValue("B{$contador}", 'TITULO');
+        $this->excel->getActiveSheet()->setCellValue("C{$contador}", 'AUTOR');
+        $this->excel->getActiveSheet()->setCellValue("D{$contador}", 'AÑO');
+        $this->excel->getActiveSheet()->setCellValue("E{$contador}", 'EDITORIAL');
+        $this->excel->getActiveSheet()->setCellValue("F{$contador}", 'EDICCION');
+        $this->excel->getActiveSheet()->setCellValue("G{$contador}", 'CODIGO TOPOGRAFICO');
+        $this->excel->getActiveSheet()->setCellValue("H{$contador}", 'CODIGO DE BARRAS');
+        $this->excel->getActiveSheet()->setCellValue("I{$contador}", 'CATEGORIA');
+        $this->excel->getActiveSheet()->setCellValue("J{$contador}", 'IDIOMA');
+        $this->excel->getActiveSheet()->setCellValue("K{$contador}", 'EJEMPLARES');
+
+        $libros = $this->Libros_model->getLibros();
+
+         //Definimos la data del cuerpo.
+        $i = 1;
+        foreach($libros as $l){
+            //Incrementamos una fila más, para ir a la siguiente.
+            $contador++;
+            //Informacion de las filas de la consulta.
+            $this->excel->getActiveSheet()->setCellValue("A{$contador}", $i);
+            $this->excel->getActiveSheet()->setCellValue("B{$contador}", $l->titulo);
+            $this->excel->getActiveSheet()->setCellValue("C{$contador}", $l->autor);
+            $this->excel->getActiveSheet()->setCellValue("D{$contador}", $l->año_publicacion);
+            $this->excel->getActiveSheet()->setCellValue("E{$contador}", $l->editorial);
+            $this->excel->getActiveSheet()->setCellValue("F{$contador}", $l->ediccion);
+            $this->excel->getActiveSheet()->setCellValue("G{$contador}", $l->codigo_topografico);
+            $this->excel->getActiveSheet()->setCellValue("H{$contador}", $l->codigo_barras);
+            $this->excel->getActiveSheet()->setCellValue("I{$contador}", $l->categoria);
+            $this->excel->getActiveSheet()->setCellValue("J{$contador}", $l->idioma);
+            $this->excel->getActiveSheet()->setCellValue("K{$contador}", $l->ejemplares);
+            
+            $i++;
+        }
+        //Le ponemos un nombre al archivo que se va a generar.
+        $archivo = "total_libros.xlsx";
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="'.$archivo.'"');
+        header('Cache-Control: max-age=0');
+        $objWriter = new PHPExcel_Writer_Excel2007($this->excel); 
+        //Hacemos una salida al navegador con el archivo Excel.
+        $objWriter->save('php://output');
+
     }
 }

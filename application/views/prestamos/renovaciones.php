@@ -2,7 +2,7 @@
       <!-- Default box -->
     <div class="box">
         <div class="box-header with-border">
-            <h3 class="box-title">Devoluciones Pendientes</h3>
+            <h3 class="box-title">Registro  de Renovaciones</h3>
 
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -59,9 +59,6 @@
                                             <td><?php echo $mensaje.$diff->days." dias";?></td>
 
                                             <td>
-                                                <button type="button" class="btn btn-success btn-xs btn-flat btn-renovar" value='<?php echo json_encode($prestamo);?>'>
-                                                    Renovar
-                                                </button>
                                                 <a href="<?php echo base_url(); ?>prestamos/update/<?php echo $prestamo->id; ?>" class="btn btn-danger btn-xs btn-flat" title="Finalizar Prestamo"><i class="fa fa-hourglass-end" aria-hidden="true"></i> Finalizar</a>
 
                                             </td>

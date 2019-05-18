@@ -110,6 +110,7 @@
 		            	<li class="<?php echo $this->uri->segment(3) === "add" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>prestamos/add"><i class="fa fa-circle-o"></i> Registrar Prestamo</a></li>
 		            	<li class="<?php echo $this->uri->segment(3) === "pendientes" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>prestamos/pendientes"><i class="fa fa-circle-o"></i> Devoluciones Pendientes</a></li>
 		            	<li class="<?php echo $this->uri->segment(3) === "all" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>prestamos"><i class="fa fa-circle-o"></i> Registro de Prestamos</a></li>
+		            	<li class="<?php echo $this->uri->segment(3) === "all" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>prestamos/renovaciones"><i class="fa fa-circle-o"></i> Registro de Renovaciones</a></li>
 		          	</ul>
 		        </li>
 				<li class="<?php echo $this->uri->segment(2) === "prestamos" ? 'active' : '' ?> treeview">
@@ -124,6 +125,7 @@
 		            	<li class="<?php echo $this->uri->segment(3) === "add" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>reportes/cuadro_anual"><i class="fa fa-circle-o"></i> Cuadro Anual de Prestamos</a></li>
 		            	<li class="<?php echo $this->uri->segment(3) === "pending" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>reportes/cuadro_mensual"><i class="fa fa-circle-o"></i> Cuadro Mensual de Prestamos</a></li>
 		            	<li class="<?php echo $this->uri->segment(3) === "pending" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>reportes/prestamos_realizados"><i class="fa fa-circle-o"></i> Prestamos Realizados</a></li>
+		            	<li class="<?php echo $this->uri->segment(3) === "pending" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>reportes/total_libros"><i class="fa fa-circle-o"></i> Total de Libros</a></li>
 		          	</ul>
 		        </li>
 				<li class="<?php echo $this->uri->segment(2) === "prestamos" ? 'active' : '' ?> treeview">

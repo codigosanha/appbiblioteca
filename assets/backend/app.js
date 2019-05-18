@@ -20,6 +20,39 @@ $(document).ready(function(){
 	$('#telefono, #ejemplares, #dni').keypress(function (tecla) {
 	  if (tecla.charCode < 48 || tecla.charCode > 57) return false;
 	});
+
+	$(document).on("click",".btn-renovar", function(){
+		var infoPrestamo = $(this).val();
+		swal({
+		    title: "¿Estas seguro que deseas renovar el préstamo para 5 días más?",
+		    text: "Si estas seguro de hacerlo haga click en el boton Aceptar, caso contrario haga click en cancelar",
+		    type: "warning",
+	        showCancelButton: true,
+	        cancelButtonClass: "btn-danger",
+	        confirmButtonClass: "btn-success",
+	        confirmButtonText: "Aceptar",
+	        closeOnConfirm: true,
+		},
+		function(isConfirm){
+		   	if (isConfirm){
+		   		$.ajax({
+					url: base_url + "prestamos/renovar",
+					type:"POST",
+					data: {prestamo:infoPrestamo},
+					success: function(resp){
+						if (resp !="0") {
+							location.reload(true);
+						}
+						else{
+							alert("No se pudo renovar el prestamo");
+						}
+					}
+				});
+		    } 
+		});
+		
+	});
+
 	$(document).on("click",".btn-eliminar", function(e){
 		e.preventDefault();
 		url = $(this).attr("href");

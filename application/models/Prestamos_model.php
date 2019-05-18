@@ -3,13 +3,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Prestamos_model extends CI_Model
 {
-    public function getPrestamos($estado = false)
+    public function getPrestamos($estado = false,$renovacion = false)
     {
         $this->db->select("p.*, le.num_documento,le.nombres,le.apellidos,li.codigo_topografico");
         $this->db->join("lectores le", "le.id = p.lector_id");
         $this->db->join("libros li", "li.id= p.libro_id");
         if ($estado !== false) {
             $this->db->where("p.estado",$estado);
+        }
+
+        if ($renovacion!== false) {
+            $this->db->where("p.renovacion",$renovacion);
         }
         $resultados = $this->db->get("prestamos p");
         if ($resultados->num_rows() > 0) {

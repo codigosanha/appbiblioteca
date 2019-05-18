@@ -37,6 +37,7 @@
                                 <th>Direccion</th>
                                 <th>Telefono</th>
                                 <th>N° Documento</th>
+                                <th>Distrito - Provincia</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -53,6 +54,7 @@
                                     <td><?php echo $lector->direccion; ?></td>
                                     <td><?php echo $lector->telefono; ?></td>
                                     <td><?php echo $lector->num_documento; ?></td>
+                                    <td><?php echo $lector->distrito_provincia; ?></td>
                                     <td>
                                         <a href="<?php echo base_url(); ?>lectores/edit/<?php echo $lector->id; ?>" class="btn btn-warning btn-flat" title="Editar"><span class="glyphicon glyphicon-pencil"></span></a>
                                     </td>

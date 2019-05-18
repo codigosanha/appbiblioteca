@@ -44,7 +44,6 @@ class Libros extends CI_Controller {
 		$codigo_topografico      = $this->input->post("codigo_topografico");
         $codigo_barras        = $this->input->post("codigo_barras");
         $titulo      = $this->input->post("titulo");
-        $subtitulo   = $this->input->post("subtitulo");
         $autor       = $this->input->post("autor");
         $publicacion = $this->input->post("publicacion");
         $editorial   = $this->input->post("editorial");
@@ -79,7 +78,6 @@ class Libros extends CI_Controller {
                 'codigo_topografico'    => $codigo_topografico,
                 'codigo_barras'        	=> $codigo_barras,
                 'titulo'      			=> $titulo,
-                'subtitulo'   			=> $subtitulo,
                 'autor'       			=> $autor,
                 'año_publicacion' 			=> $publicacion,
                 'editorial'   			=> $editorial,
@@ -121,7 +119,6 @@ class Libros extends CI_Controller {
     	$codigo_topografico      = $this->input->post("codigo_topografico");
         $codigo_barras        = $this->input->post("codigo_barras");
         $titulo      = $this->input->post("titulo");
-        $subtitulo   = $this->input->post("subtitulo");
         $autor       = $this->input->post("autor");
         $publicacion = $this->input->post("publicacion");
         $editorial   = $this->input->post("editorial");
@@ -163,7 +160,6 @@ class Libros extends CI_Controller {
                 'codigo_topografico'    => $codigo_topografico,
                 'codigo_barras'        	=> $codigo_barras,
                 'titulo'      			=> $titulo,
-                'subtitulo'   			=> $subtitulo,
                 'autor'       			=> $autor,
                 'año_publicacion' 			=> $publicacion,
                 'editorial'   			=> $editorial,

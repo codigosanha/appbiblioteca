@@ -33,10 +33,6 @@
                     <input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" value="<?php echo set_value('titulo'); ?>" required="required">
                     <?php echo form_error('titulo'); ?>
                 </div>
-                <div class="form-group">
-                    <label for="subtitulo">Subtitulo</label>
-                    <input type="text" class="form-control" id="subtitulo" name="subtitulo" placeholder="Subtitulo">
-                </div>
                 <div class="form-group <?php echo form_error('autor') == true ? 'has-error' : '' ?>">
                     <label for="autor">Autor</label>
                     <input type="text" class="form-control" id="autor" name="autor" placeholder="Autor" value="<?php echo set_value('autor'); ?>" required="required">
@@ -61,7 +57,10 @@
             </div>
             <div class="form-group">
                 <label for="idioma">Idioma</label>
-                <input type="text" class="form-control" id="idioma" name="idioma" placeholder="Idioma" required="">
+                <select name="idioma" id="idioma" class="form-control">
+                    <option value="Español">Español</option>
+                    <option value="Ingles">Ingles</option>
+                </select>
             </div>
             <div class="form-group <?php echo form_error('ejemplares') == true ? 'has-error' : '' ?>">
                 <label for="ejemplares">Ejemplares</label>

@@ -63,6 +63,13 @@
                    
                     <?php echo form_error('num_documento'); ?>
                 </div>
+
+                <div class="form-group <?php echo form_error('distrito_provincia') == true ? 'has-error' : '' ?>">
+                    <label for="distrito_provincia">Distrito - Provincia</label>
+                    <input type="text" class="form-control" id="distrito_provincia" name="distrito_provincia" placeholder="Numero de Documento" required="required" value="<?php echo set_value('distrito_provincia'); ?>" required="required">
+                   
+                    <?php echo form_error('distrito_provincia'); ?>
+                </div>
             </div>
         </div>
         <!-- /.box-body -->

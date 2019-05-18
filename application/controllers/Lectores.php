@@ -50,7 +50,7 @@ class Lectores extends CI_Controller {
         $telefono       = $this->input->post("telefono");
         $direccion       = $this->input->post("direccion");
         $num_documento = $this->input->post("num_documento");
-
+        $distrito_provincia = $this->input->post("distrito_provincia");
         $this->form_validation->set_rules('num_documento', 'Numero de Documento', 'trim|required|is_unique[lectores.num_documento]', array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
         $this->form_validation->set_error_delimiters('<span class="help-block">', '</span>');
 
@@ -65,6 +65,7 @@ class Lectores extends CI_Controller {
                 'tipo_lector_id'       			=> $tipo_lector_id,
                 'telefono' 			=> $telefono,
                 'direccion'   			=> $direccion,
+                'distrito_provincia'             => $distrito_provincia,
             );
 
             if ($this->Lectores_model->save($dataLector)) {
@@ -101,6 +102,7 @@ class Lectores extends CI_Controller {
         $tipo_lector_id   = $this->input->post("tipo_lector_id");
         $telefono       = $this->input->post("telefono");
         $num_documento = $this->input->post("num_documento");
+        $distrito_provincia = $this->input->post("distrito_provincia");
 
         $lectorActual = $this->Lectores_model->getLector($idLector);
         $is_unique = "";
@@ -123,6 +125,7 @@ class Lectores extends CI_Controller {
                 'tipo_lector_id'                => $tipo_lector_id,
                 'telefono'          => $telefono,
                 'direccion'             => $direccion,
+                'distrito_provincia'             => $distrito_provincia,
             );
 
             if ($this->Lectores_model->update($idLector,$dataLector)) {

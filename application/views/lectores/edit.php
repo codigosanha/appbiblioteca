@@ -62,6 +62,10 @@
                     <label for="num_documento">Numero Documento</label>
                     <input type="text" class="form-control" id="num_documento" name="num_documento" placeholder="Numero de Documento" required="required" value="<?php echo $lector->num_documento;?>">
                 </div>
+                <div class="form-group">
+                    <label for="distrito_provincia">Distrito - Provincia</label>
+                    <input type="text" class="form-control" id="distrito_provincia" name="distrito_provincia" placeholder="Numero de Documento" required="required" value="<?php echo $lector->distrito_provincia;?>">
+                </div>
             </div>
         </div>
         <!-- /.box-body -->

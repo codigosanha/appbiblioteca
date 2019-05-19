@@ -36,12 +36,19 @@
 	  <div class="form-group">
 		<button type="submit" class="btn btn-primary btn-block btn-flat" id="btn-login">Acceder</button>
 	  </div>
-	  <?php if ($this->session->flashdata("error")): ?>
-		<div class="alert alert-danger alert-dismissable text-justify">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<?php echo $this->session->flashdata("error"); ?>
-	  </div>
-	  <?php endif;?>
+	  	<?php 
+	  		$displayErrorLogin = "none";
+	  		$messageErrorLogin = "";
+	  		if ($this->session->flashdata("error")){
+	  			$displayErrorLogin = "block";
+	  			$messageErrorLogin =$this->session->flashdata("error");
+	  		}
+	  	?>
+		<div class="alert alert-danger alert-dismissable text-justify" style="display: <?php echo $displayErrorLogin;?>">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			<p class="messageErrorLogin"><?php echo $messageErrorLogin;?></p>
+	  	</div>
+	  
 
 		<!-- /.col -->
 
@@ -59,32 +66,25 @@
 
 <script>
 	$(document).ready(function(){
-		var limit_attempt = 3;
+		var limit_attempt = 5;
 		var attempts = "<?php echo $this->session->userdata('attempts');?>";
 		if (attempts == limit_attempt) {
 			var add_time_last_attempt = "<?php echo $this->session->userdata('add_time_last_attempt');?>";
-			
 			$("#email").attr("disabled","disabled");
 			$("#password").attr("disabled","disabled");
 			$("#btn-login").attr("disabled","disabled");
 			$(".alert").show();
-			$(".alert p").remove();
 			$(".alert").append("<p>Ha llegado al limite de intentos...Vuelva a intentarlo en "+messageTime(add_time_last_attempt)+"<p>");
 		}
 		if (attempts > 0 && attempts < limit_attempt) {
-			$(".alert p").remove();
+			$(".alert").show();
 			$(".alert").append("<p>Le quedan "+(limit_attempt-Number(attempts))+" intentos<p>");
 		}
 
 		function messageTime(add_time_last_attempt){
-			console.log(add_time_last_attempt);
 			var date = new Date();
   			var time = Math.floor(date.getTime()/1000);
-
-  			diff = add_time_last_attempt -time;
-  			console.log(time);
-  			console.log(diff);
-
+  			diff = add_time_last_attempt - time;
   			if (diff > 60) {
   				minutes = Math.ceil(diff / 60);
   				return minutes+ " minutos";

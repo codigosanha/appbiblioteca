@@ -53,6 +53,7 @@ class Libros extends CI_Controller {
         $categoria_id  = $this->input->post("categoria_id");
 
         $this->form_validation->set_rules('codigo_topografico', 'Codigo Topografico', 'trim|required|is_unique[libros.codigo_topografico]', array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
+        $this->form_validation->set_rules('codigo_barras', 'Codigo de Barras', 'trim|required|is_unique[libros.codigo_barras]', array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
         $this->form_validation->set_rules('titulo', 'Titulo', 'trim|required', array('required' => 'Debes proporcionar un %s.'));
         $this->form_validation->set_rules('autor', 'Autor', 'trim|required', array('required' => 'Debes proporcionar un %s.'));
         $this->form_validation->set_rules('ejemplares', 'Ejemplares', 'trim|required', array('required' => 'Debes proporcionar un %s.'));
@@ -133,8 +134,12 @@ class Libros extends CI_Controller {
         if ($libroActual->codigo_topografico != $codigo_topografico) {
         	$is_unique = '|is_unique[libros.codigo_topografico]';
         }
+        if ($libroActual->codigo_barras != $codigo_barras) {
+            $is_unique = '|is_unique[libros.codigo_barras]';
+        }
 
         $this->form_validation->set_rules('codigo_topografico', 'Codigo Topografico', 'trim|required'.$is_unique, array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
+        $this->form_validation->set_rules('codigo_barras', 'Codigo de Barras', 'trim|required'.$is_unique, array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
         $this->form_validation->set_rules('titulo', 'Titulo', 'trim|required', array('required' => 'Debes proporcionar un %s.'));
         $this->form_validation->set_rules('autor', 'Autor', 'trim|required', array('required' => 'Debes proporcionar un %s.'));
         $this->form_validation->set_rules('ejemplares', 'Ejemplares', 'trim|required', array('required' => 'Debes proporcionar un %s.'));

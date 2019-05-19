@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
 
-    protected $time_attempt = 100;
-    protected $limit_attempts = 3;
+    protected $time_attempt = 300;
+    protected $limit_attempts = 5;
 
 	public function __construct(){
 		parent::__construct();
@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
             if (time() > $add_time_last_attempt) {
                 $this->session->set_userdata("attempts",0);
                 $this->session->unset_userdata('add_time_last_attempt');
-                $this->session->unset_userdata('error');
+
             }
         }
 	}
@@ -38,7 +38,7 @@ class Auth extends CI_Controller {
         $pass  = $this->input->post("password");
         $res = $this->Usuarios_model->logear($email, md5($pass));
         if ($res) {
-            /*echo "Sucess";*/
+            $this->session->unset_userdata(['attempts','add_time_last_attempt']);
             $data = array(
                 'id_user' => $res->id,
                 'user'    => $res->nombres,
@@ -48,7 +48,6 @@ class Auth extends CI_Controller {
             redirect(base_url() . "dashboard");
         } else {
             $attempts = $this->session->userdata("attempts") + 1;
-            $this->session->set_userdata("error","error");
             $this->session->set_userdata("attempts",$attempts);
             if ($attempts == $this->limit_attempts) {
                 $this->session->set_userdata("add_time_last_attempt",time() + $this->time_attempt);

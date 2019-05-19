@@ -26,15 +26,15 @@
 
 	<form action="<?php echo base_url() ?>auth/validar" method="post">
 	  <div class="form-group has-feedback">
-		<input type="email" class="form-control" placeholder="Email" name="email" required>
+		<input type="email" class="form-control" placeholder="Email" name="email" id="email" required>
 		<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 	  </div>
 	  <div class="form-group has-feedback">
-		<input type="password" class="form-control" placeholder="Password" name="password" required>
+		<input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
 		<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 	  </div>
 	  <div class="form-group">
-		<button type="submit" class="btn btn-primary btn-block btn-flat">Acceder</button>
+		<button type="submit" class="btn btn-primary btn-block btn-flat" id="btn-login">Acceder</button>
 	  </div>
 	  <?php if ($this->session->flashdata("error")): ?>
 		<div class="alert alert-danger alert-dismissable text-justify">
@@ -53,9 +53,48 @@
 <!-- /.login-box -->
 
 <!-- jQuery 2.2.3 -->
-<script src="<?php echo base_url(); ?>assets/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/jquery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url(); ?>assets/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+	$(document).ready(function(){
+		var limit_attempt = 3;
+		var attempts = "<?php echo $this->session->userdata('attempts');?>";
+		if (attempts == limit_attempt) {
+			var add_time_last_attempt = "<?php echo $this->session->userdata('add_time_last_attempt');?>";
+			
+			$("#email").attr("disabled","disabled");
+			$("#password").attr("disabled","disabled");
+			$("#btn-login").attr("disabled","disabled");
+			$(".alert").show();
+			$(".alert p").remove();
+			$(".alert").append("<p>Ha llegado al limite de intentos...Vuelva a intentarlo en "+messageTime(add_time_last_attempt)+"<p>");
+		}
+		if (attempts > 0 && attempts < limit_attempt) {
+			$(".alert p").remove();
+			$(".alert").append("<p>Le quedan "+(limit_attempt-Number(attempts))+" intentos<p>");
+		}
+
+		function messageTime(add_time_last_attempt){
+			console.log(add_time_last_attempt);
+			var date = new Date();
+  			var time = Math.floor(date.getTime()/1000);
+
+  			diff = add_time_last_attempt -time;
+  			console.log(time);
+  			console.log(diff);
+
+  			if (diff > 60) {
+  				minutes = Math.ceil(diff / 60);
+  				return minutes+ " minutos";
+  			} else{
+  				return diff+" segundos";
+  			}
+		}
+	});
+	
+</script>
 
 
 </body>

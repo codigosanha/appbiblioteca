@@ -22,12 +22,13 @@
             <div class="col-md-6">
                 <div class="form-group <?php echo form_error('codigo_topografico') == true ? 'has-error' : '' ?>">
                     <label for="codigo_topografico">Codigo Topografico</label>
-                    <input type="text" class="form-control" id="codigo_topografico" name="codigo_topografico" placeholder="Codigo" value="<?php echo set_value('codigo_topografico') ?: $libro->codigo_topografico; ?>" required="required">
+                    <input type="text" class="form-control" id="codigo_topografico" name="codigo_topografico" placeholder="Codigo Tpografico" value="<?php echo set_value('codigo_topografico') ?: $libro->codigo_topografico; ?>" required="required">
                     <?php echo form_error('codigo_topografico'); ?>
                 </div>
-                <div class="form-group">
+                <div class="form-group <?php echo form_error('codigo_barras') == true ? 'has-error' : '' ?>">
                     <label for="codigo_barras">Codigo Barras</label>
-                    <input type="text" class="form-control" id="codigo_barras" name="codigo_barras" placeholder="Codigo Barras" required="required" value="<?php echo $libro->codigo_barras;?>">
+                    <input type="text" class="form-control" id="codigo_barras" name="codigo_barras" placeholder="Codigo de Barras" value="<?php echo set_value('codigo_barras') ?: $libro->codigo_barras; ?>" required="required">
+                    <?php echo form_error('codigo_barras'); ?>
                 </div>
                 <div class="form-group <?php echo form_error('titulo') == true ? 'has-error' : '' ?>">
                     <label for="titulo">Titulo</label>
@@ -41,7 +42,7 @@
                 </div>
                 <div class="form-group">
                     <label for="publicacion">Año de Publicacion</label>
-                    <input type="text" id="datepicker"class="form-control" id="publicacion" name="publicacion" placeholder="Año de Publicacion" value="<?php echo $libro->año_publicacion;?>">
+                    <input type="text" id="datepicker"class="form-control" id="publicacion" name="publicacion" placeholder="Año de Publicacion" value="<?php echo $libro->año_publicacion;?>" required="required">
                 </div>
 
             </div>
@@ -54,7 +55,7 @@
 
             <div class="form-group">
                 <label for="ediccion">Ediccion</label>
-                <input type="text" class="form-control" id="ediccion" name="ediccion" placeholder="Ediccion"  value="<?php echo $libro->ediccion;?>">
+                <input type="text" class="form-control" id="ediccion" name="ediccion" placeholder="Ediccion"  value="<?php echo $libro->ediccion;?>" maxlength="15">
             </div>
             <div class="form-group">
                 <label for="idioma">Idioma</label>
@@ -65,7 +66,7 @@
             </div>
             <div class="form-group <?php echo form_error('ejemplares') == true ? 'has-error' : '' ?>">
                 <label for="ejemplares">Ejemplares</label>
-                <input type="text" class="form-control" id="ejemplares" name="ejemplares" placeholder="Ejemplares" value="<?php echo set_value('ejemplares')?:$libro->ejemplares; ?>" required="required">
+                <input type="number" class="form-control" id="ejemplares" name="ejemplares" placeholder="Ejemplares" value="<?php echo set_value('ejemplares')?:$libro->ejemplares; ?>" required="required" min="1">
                 <?php echo form_error('ejemplares'); ?>
             </div>
             <div class="form-group <?php echo form_error('categoria_id') == true ? 'has-error' : '' ?>">

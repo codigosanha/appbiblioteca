@@ -38,12 +38,12 @@
             <div class="col-md-6">
                 <div class="form-group <?php echo form_error('dni') == true ? 'has-error' : '' ?>">
                     <label for="dni">DNI</label>
-                    <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI" required="required" value="<?php echo set_value('dni'); ?>">
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI" required="required" value="<?php echo set_value('dni'); ?>" maxlength="8">
                     <?php echo form_error('dni'); ?>
                 </div>
                 <div class="form-group">
                     <label for="telefono">Telefono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" value="<?php echo set_value('telefono')?:''; ?>">
+                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" value="<?php echo set_value('telefono')?:''; ?>" maxlength="9">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>

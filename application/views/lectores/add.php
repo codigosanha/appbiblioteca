@@ -49,7 +49,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="telefono">Telefono</label>
-                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" value="<?php echo set_value('telefono')?:''; ?>">
+                    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Telefono" value="<?php echo set_value('telefono')?:''; ?>" maxlength="9">
                 </div>
 
                 <div class="form-group">

@@ -1,6 +1,37 @@
 $(document).ready(function(){
 	$('.sidebar-menu').tree();
 
+	$("#ejemplares").keyup(function(event){
+    	valor = $(this).val();
+    	if (valor !='') {
+    		if (valor == 0) {
+	    		swal("Error","El valor de ejemplares no puede ser 0","error");
+	    		$(this).val("1");
+	    	}
+    	}
+    	
+    });
+
+	$("#nombres, #apellidos, #autor, #editorial, #titulo").keydown(function(event){
+    	var key = event.which;
+	    if((key < 65 || key > 90) && key !==8 && key !== 32){
+	       	return false;
+	    }
+    });
+
+    $("#ediccion").keydown(function(event){
+    	var key = event.which;
+	    if((key < 65 || key > 105) && key !==8 && key !== 32){
+	       	return false;
+	    }
+    });
+
+    $("#distrito_provincia").keydown(function(event){
+    	var key = event.which;
+	    if((key < 65 || key > 90) && key !==8 && key !== 32 && key!==189){
+	       	return false;
+	    }
+    });
 
 	$("#checkChangePassword").on("change", function(){
 		$("#password").val(null);
@@ -17,7 +48,7 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#telefono, #ejemplares, #dni').keypress(function (tecla) {
+	$('#dni, #telefono').keypress(function (tecla) {
 	  if (tecla.charCode < 48 || tecla.charCode > 57) return false;
 	});
 
@@ -100,7 +131,8 @@ $(document).ready(function(){
 	$("#datepicker").datepicker({
 	    format: "yyyy",
 	    viewMode: "years", 
-	    minViewMode: "years"
+	    minViewMode: "years",
+	    startDate : '1900'
 	});
 	$("#datepicker1").datepicker({
 	    format: "mm-yyyy",

@@ -92,6 +92,8 @@ class Usuarios extends CI_Controller {
         $password   = $this->input->post("password");
         $changePassword   = $this->input->post("checkChangePassword");
 
+
+
         $usuarioActual = $this->Usuarios_model->getUsuario($idUsuario);
         $is_unique_email = '';
         $is_unique_dni = '';
@@ -102,8 +104,10 @@ class Usuarios extends CI_Controller {
             $is_unique_dni = '|is_unique[usuarios.dni]';
         }
 
-        if ($changePassword != "1") {
+        if (empty($changePassword)) {
             $password = $usuarioActual->password;
+        }else{
+            $password = md5($password);
         }
         $this->form_validation->set_rules('dni', 'Numero de Documento', 'trim|required'.$is_unique_dni, array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
         $this->form_validation->set_rules('email', 'Email', 'trim|required'.$is_unique_email, array('required' => 'Debes proporcionar un %s.', 'is_unique' => 'Este %s ya existe'));
@@ -119,7 +123,7 @@ class Usuarios extends CI_Controller {
                 'dni'        => $dni,
                 'telefono'   => $telefono,
                 'email'      => $email,
-                'password'   => md5($password)
+                'password'   => $password
             );
 
             if ($this->Usuarios_model->update($idUsuario,$dataUsuario)) {

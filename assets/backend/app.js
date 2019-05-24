@@ -1,6 +1,33 @@
 $(document).ready(function(){
 	$('.sidebar-menu').tree();
 
+	$(document).on("change", "#fecprestamo", function(){
+		fecha = $(this).val();
+		
+		var date = new Date(fecha);
+		var fecha = sumarDias(date, 5);
+
+	   	d = fecha.getDate() + 1;
+        m = fecha.getMonth()+1; 
+        y = fecha.getFullYear();
+        var data ="";
+
+	    if(d < 10){
+	        d = "0"+d;
+	    };
+	    if(m < 10){
+	        m = "0"+m;
+	    };
+
+	    data = y+"-"+m+"-"+d;
+	    $("#fecdevolucion").val(data);
+	});
+
+	function sumarDias(fecha, dias){
+	  fecha.setDate(fecha.getDate() + dias);
+	  return fecha;
+	}
+
 	$("#ejemplares").keyup(function(event){
     	valor = $(this).val();
     	if (valor !='') {

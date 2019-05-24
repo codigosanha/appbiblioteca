@@ -85,6 +85,19 @@
 		            	<li class="<?php echo $this->uri->segment(3) === "pending" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>categorias"><i class="fa fa-circle-o"></i> Categorias</a></li>
 		          	</ul>
 		        </li>
+		        <li class="<?php echo $this->uri->segment(2) === "revistas" ? 'active' : '' ?> treeview">
+		          	<a href="#">
+		            	<i class="fa fa-share-alt" aria-hidden="true"></i>
+		            	<span>Revistas</span>
+		            	<span class="pull-right-container">
+		              		<i class="fa fa-angle-left pull-right"></i>
+		            	</span>
+		          	</a>
+		          	<ul class="treeview-menu">
+		            	<li class="<?php echo $this->uri->segment(3) === "add" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>revistas/add"><i class="fa fa-circle-o"></i> Registrar Revista</a></li>
+		            	<li class="<?php echo $this->uri->segment(3) === "pending" ? 'active' : '' ?>"><a href="<?php echo base_url(); ?>revistas"><i class="fa fa-circle-o"></i> Catalogo de Revistas</a></li>
+		          	</ul>
+		        </li>
 		        <li class="<?php echo $this->uri->segment(2) === "prestamos" ? 'active' : '' ?> treeview">
 		          	<a href="#">
 		            	<i class="fa fa-share-alt" aria-hidden="true"></i>

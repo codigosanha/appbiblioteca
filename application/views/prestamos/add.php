@@ -101,7 +101,7 @@
                 <div class="form-group">
                     <label for="fecprestamo" class="col-md-3 control-label">Fecha Prestamo:</label>
                     <div class="col-md-4">
-                        <input type="date" name="fecprestamo" class="form-control" value="<?php echo date("Y-m-d");?>" required>
+                        <input type="date" name="fecprestamo" id="fecprestamo" class="form-control" value="<?php echo date("Y-m-d");?>" required>
                     </div>
                     <label for="hora" class="col-md-1 control-label">Hora:</label>
                     <div class="col-md-4">
@@ -109,9 +109,14 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <?php 
+                        $fechaActual = date('Y-m-d');
+                        $nuevafecha = strtotime ( '+5 day' , strtotime ( $fechaActual ) ) ;
+                        $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
+                    ?>
                     <label for="fecdevolucion" class="col-md-3 control-label">Fecha Devolución:</label>
                     <div class="col-md-4">
-                        <input type="date" name="fecdevolucion" class="form-control" value="<?php echo date("Y-m-d");?>" required>
+                        <input type="date" name="fecdevolucion" id="fecdevolucion" class="form-control" value="<?php echo $nuevafecha;?>" required>
                     </div>
                     
                 </div>
